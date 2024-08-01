@@ -1640,13 +1640,22 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			local Paragraph = Elements.Template.Paragraph:Clone()
 			Paragraph.Title.Text = ParagraphSettings.Title
-			Paragraph.Content.Text = ParagraphSettings.Content
+			Paragraph.Content.Text = ParagraphSettings.Content.."\n"
 			Paragraph.Visible = true
 			Paragraph.Parent = TabPage
 
-			Paragraph.Content.Size = UDim2.new(0, 438, 0, Paragraph.Content.TextBounds.Y)
-			Paragraph.Content.Position = UDim2.new(1, -10, 0.575,0 )
-			Paragraph.Size = UDim2.new(1, -10, 0, Paragraph.Content.TextBounds.Y)
+			local textSize = TextService:GetTextSize(
+				Paragraph.Content.Text,
+				Paragraph.Content.TextSize,
+				Paragraph.Content.Font,
+				Vector2.new(Paragraph.Content.AbsoluteSize.X, Paragraph.Content.AbsoluteSize.Y)
+			)
+
+			Paragraph.Content.Size = UDim2.new(0, 438, 0, textSize.Y)
+			Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
+
+			Paragraph.Size = UDim2.new(1, -10, 0, textSize.Y)
+
 
 			Paragraph.BackgroundTransparency = 1
 			Paragraph.UIStroke.Transparency = 1
@@ -1663,7 +1672,20 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			function ParagraphValue:Set(NewParagraphSettings)
 				Paragraph.Title.Text = NewParagraphSettings.Title
-				Paragraph.Content.Text = NewParagraphSettings.Content
+				Paragraph.Content.Text = NewParagraphSettings.Content.."\n"
+
+				local textSize = TextService:GetTextSize(
+					Paragraph.Content.Text,
+					Paragraph.Content.TextSize,
+					Paragraph.Content.Font,
+					Vector2.new(Paragraph.Content.AbsoluteSize.X, math.huge)
+				)
+
+				Paragraph.Content.Size = UDim2.new(0, 438, 0, textSize.Y)
+				Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
+
+				Paragraph.Size = UDim2.new(1, -10, 0, textSize.Y + 25)
+
 			end
 
 			return ParagraphValue
