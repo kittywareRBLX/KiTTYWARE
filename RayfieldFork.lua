@@ -1648,7 +1648,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Paragraph.Content.Text,
 				Paragraph.Content.TextSize,
 				Paragraph.Content.Font,
-				Vector2.new(Paragraph.Content.AbsoluteSize.X, math.huge)
+				Vector2.new(Paragraph.Content.AbsoluteSize.X, Paragraph.Content.AbsoluteSize.Y)
 			)
 
 			Paragraph.Content.Size = UDim2.new(0, 438, 0, textSize.Y)
