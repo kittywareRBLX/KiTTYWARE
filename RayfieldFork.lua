@@ -1652,9 +1652,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 			)
 
 			Paragraph.Content.Size = UDim2.new(0, 438, 0, textSize.Y)
-			Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
+			Paragraph.Content.Position = UDim2.new(0.037, 0, 0, 0)
 
-			Paragraph.Size = UDim2.new(1, -10, 0, textSize.Y / 2.5)
+			Paragraph.Size = UDim2.new(1, -10, 0, textSize.Y + 10)
 
 
 			Paragraph.BackgroundTransparency = 1
@@ -1672,7 +1672,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			function ParagraphValue:Set(NewParagraphSettings)
 				Paragraph.Title.Text = NewParagraphSettings.Title
-				Paragraph.Content.Text = NewParagraphSettings.Content.."\n"
+				Paragraph.Content.Text = NewParagraphSettings.Content
 
 				local textSize = TextService:GetTextSize(
 					Paragraph.Content.Text,
@@ -1682,9 +1682,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 				)
 
 				Paragraph.Content.Size = UDim2.new(0, 438, 0, textSize.Y)
-				Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
+				Paragraph.Content.Position = UDim2.new(0.037, 0, 0, 0)
 
-				Paragraph.Size = UDim2.new(1, -10, 0, textSize.Y + 25)
+				Paragraph.Size = UDim2.new(1, -10, 0, textSize.Y + 10)
 
 			end
 
