@@ -1672,7 +1672,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			function ParagraphValue:Set(NewParagraphSettings)
 				Paragraph.Title.Text = NewParagraphSettings.Title
-				Paragraph.Content.Text = NewParagraphSettings.Content
+				Paragraph.Content.Text = NewParagraphSettings.Content.."\n"
 
 				local textSize = TextService:GetTextSize(
 					Paragraph.Content.Text,
