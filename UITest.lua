@@ -126,7 +126,7 @@ local PlayerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
 
 -- Interface Management
 
-local Rayfield = game:GetObjects("rbxassetid://12531161931")[1]
+local Rayfield = getgenv().Rayfield
 
 print(Rayfield, type(Rayfield))
 
