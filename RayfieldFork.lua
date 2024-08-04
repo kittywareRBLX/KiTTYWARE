@@ -1640,18 +1640,23 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		    local Paragraph = Elements.Template.Paragraph:Clone()
 		    Paragraph.Title.Text = ParagraphSettings.Title
-		    Paragraph.Content.Text = ParagraphSettings.Content
+		    Paragraph.Content.Text = ParagraphSettings.Content.."\n"
 		    Paragraph.Visible = true
 		    Paragraph.Parent = TabPage
 		
-		    local contentSize = Paragraph.Content.TextBounds
-		    Paragraph.Content.Size = UDim2.new(0, contentSize.X, 0, contentSize.Y)
-		    Paragraph.Content.Position = UDim2.new(0, 10, 0, Paragraph.Title.TextBounds.Y + 10) 
+		    local function calculateTextHeight(text, font, textSize, maxWidth)
+		        local textSize = TextService:GetTextSize(text, textSize, font, Vector2.new(maxWidth, math.huge))
+		        return textSize.Y
+		    end
 		
-		    local titleHeight = Paragraph.Title.TextBounds.Y
-		    local padding = 20
-		    Paragraph.Size = UDim2.new(1, -20, 0, contentSize.Y + titleHeight + padding) 
-
+		    local maxWidth = 438
+		    local textHeight = calculateTextHeight(Paragraph.Content.Text, Paragraph.Content.Font, Paragraph.Content.TextSize, maxWidth)
+		
+		    Paragraph.Content.Size = UDim2.new(0, maxWidth, 0, textHeight)
+		    Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
+		
+		    Paragraph.Size = UDim2.new(1, -10, 0, textHeight + 25)
+		
 		    Paragraph.BackgroundTransparency = 1
 		    Paragraph.UIStroke.Transparency = 1
 		    Paragraph.Title.TextTransparency = 1
@@ -1662,16 +1667,19 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		    TweenService:Create(Paragraph, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
 		    TweenService:Create(Paragraph.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
-		    TweenService:Create(Paragraph.Title, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()    
-		    TweenService:Create(Paragraph.Content, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()    
+		    TweenService:Create(Paragraph.Title, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()
+		    TweenService:Create(Paragraph.Content, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()
 		
 		    function ParagraphValue:Set(NewParagraphSettings)
 		        Paragraph.Title.Text = NewParagraphSettings.Title
-		        Paragraph.Content.Text = NewParagraphSettings.Content
-		        
-		     	local newContentSize = Paragraph.Content.TextBounds
-		        Paragraph.Content.Size = UDim2.new(0, newContentSize.X, 0, newContentSize.Y)
-		        Paragraph.Size = UDim2.new(1, -20, 0, newContentSize.Y + Paragraph.Title.TextBounds.Y + padding)
+		        Paragraph.Content.Text = NewParagraphSettings.Content.."\n"
+		
+		        local textHeight = calculateTextHeight(Paragraph.Content.Text, Paragraph.Content.Font, Paragraph.Content.TextSize, maxWidth)
+		
+		        Paragraph.Content.Size = UDim2.new(0, maxWidth, 0, textHeight)
+		        Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
+		
+		        Paragraph.Size = UDim2.new(1, -10, 0, textHeight + 25)
 		    end
 		
 		    return ParagraphValue
