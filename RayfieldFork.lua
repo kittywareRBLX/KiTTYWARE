@@ -1640,7 +1640,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		    local Paragraph = Elements.Template.Paragraph:Clone()
 		    Paragraph.Title.Text = ParagraphSettings.Title
-		    Paragraph.Content.Text = ParagraphSettings.Content
+		    Paragraph.Content.Text = "\n\n"..ParagraphSettings.Content
 		    Paragraph.Visible = true
 		    Paragraph.Parent = TabPage
 		
@@ -1672,7 +1672,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		
 		    function ParagraphValue:Set(NewParagraphSettings)
 		        Paragraph.Title.Text = NewParagraphSettings.Title
-		        Paragraph.Content.Text = NewParagraphSettings.Content
+		        Paragraph.Content.Text = "\n\n"..NewParagraphSettings.Content
 		    end
 		
 		    return ParagraphValue
