@@ -1652,7 +1652,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    local maxWidth = 438
 		    local textHeight = calculateTextHeight(Paragraph.Content.Text, Paragraph.Content.Font, Paragraph.Content.TextSize, maxWidth)
 		
-		    Paragraph.Content.Size = UDim2.new(0, maxWidth, 0, textHeight - 10)
+		    Paragraph.Content.Size = UDim2.new(0, maxWidth, 0, textHeight - 1)
 		    Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
 		
 		    Paragraph.Size = UDim2.new(1, -10, 0, textHeight + 40)
