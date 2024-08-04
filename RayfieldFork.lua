@@ -1655,7 +1655,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    Paragraph.Content.Size = UDim2.new(0, maxWidth, 0, textHeight)
 		    Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
 		
-		    Paragraph.Size = UDim2.new(1, -10, 0, textHeight + 25)
+		    Paragraph.Size = UDim2.new(1, -10, 0, textHeight - 25)
 		
 		    Paragraph.BackgroundTransparency = 1
 		    Paragraph.UIStroke.Transparency = 1
@@ -1673,13 +1673,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    function ParagraphValue:Set(NewParagraphSettings)
 		        Paragraph.Title.Text = NewParagraphSettings.Title
 		        Paragraph.Content.Text = NewParagraphSettings.Content.."\n"
-		
-		        local textHeight = calculateTextHeight(Paragraph.Content.Text, Paragraph.Content.Font, Paragraph.Content.TextSize, maxWidth)
-		
-		        Paragraph.Content.Size = UDim2.new(0, maxWidth, 0, textHeight)
-		        Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
-		
-		        Paragraph.Size = UDim2.new(1, -10, 0, textHeight + 25)
 		    end
 		
 		    return ParagraphValue
