@@ -1644,14 +1644,14 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    Paragraph.Visible = true
 		    Paragraph.Parent = TabPage
 		
-		    Paragraph.Content.Size = UDim2.new(0, 438, 0, Paragraph.Content.TextBounds.Y)
-		    Paragraph.Content.Position = UDim2.new(1, -10, 0.575,0 )
+		    local contentSize = Paragraph.Content.TextBounds
+		    Paragraph.Content.Size = UDim2.new(0, contentSize.X, 0, contentSize.Y)
+		    Paragraph.Content.Position = UDim2.new(0, 10, 0, Paragraph.Title.TextBounds.Y + 10) 
 		
-		    local contentHeight = Paragraph.Content.TextBounds.Y
 		    local titleHeight = Paragraph.Title.TextBounds.Y
 		    local padding = 20
-		    Paragraph.Size = UDim2.new(1, -10, 0, contentHeight + titleHeight + padding)
-		
+		    Paragraph.Size = UDim2.new(1, -20, 0, contentSize.Y + titleHeight + padding) 
+
 		    Paragraph.BackgroundTransparency = 1
 		    Paragraph.UIStroke.Transparency = 1
 		    Paragraph.Title.TextTransparency = 1
@@ -1668,6 +1668,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 		    function ParagraphValue:Set(NewParagraphSettings)
 		        Paragraph.Title.Text = NewParagraphSettings.Title
 		        Paragraph.Content.Text = NewParagraphSettings.Content
+		        
+		     	local newContentSize = Paragraph.Content.TextBounds
+		        Paragraph.Content.Size = UDim2.new(0, newContentSize.X, 0, newContentSize.Y)
+		        Paragraph.Size = UDim2.new(1, -20, 0, newContentSize.Y + Paragraph.Title.TextBounds.Y + padding)
 		    end
 		
 		    return ParagraphValue
