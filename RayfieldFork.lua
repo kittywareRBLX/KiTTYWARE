@@ -2206,7 +2206,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				ListClone.Title.Position = UDim2.fromOffset(150,21)
 				ListClone.Icon.Visible = true
 				ListClone.Icon.Image = ListSettings.Icon
-				ListClone.Icon.Size = UDim2.new(0, 35, 0, 35)
+				ListClone.Icon.Size = UDim2.new(0, 30, 0, 30)
         			ListClone.Icon.Position = UDim2.new(0, 5, 0, 5)
 			end
 			ListClone.Visible = true
