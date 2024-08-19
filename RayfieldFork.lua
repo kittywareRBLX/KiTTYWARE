@@ -659,8 +659,7 @@ function RayfieldLibrary:Notify(NotificationSettings)
 	end)
 end
 
-function Hide()
-
+function RayfieldLibrary:Hide()
 	-- if isMobile then
 	-- 	RayfieldLibrary:Notify({Title = "Interface", Content = "Mobile players cannot hide the UI, only minimize", Duration = 4})
 	-- 	return
@@ -718,7 +717,7 @@ function Hide()
 	Debounce = false
 end
 
-function Unhide()
+function RayfieldLibrary:Unhide()
 	Debounce = true
 	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Main.Visible = true
@@ -2203,7 +2202,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			ListClone.Title.Text = ListSettings.Name
 			if ListSettings.Icon ~= nil then
 				table.insert(RayfieldLibrary.DropdownIcons, ListClone.Icon)
-				ListClone.Title.Position = UDim2.fromOffset(155,21)
+				ListClone.Title.Position = UDim2.fromOffset(150,21)
 				ListClone.Icon.Visible = true
 				ListClone.Icon.Image = ListSettings.Icon
 				ListClone.Icon.Size = UDim2.new(0, 25, 0, 25)
@@ -2951,10 +2950,10 @@ Topbar.Hide.MouseButton1Click:Connect(function()
 	if Hidden then
 		Hidden = false
 		Minimised = false
-		Unhide()
+		RayfieldLibrary:Unhide()
 	else
 		Hidden = true
-		Hide()
+		RayfieldLibrary:Hide()
 	end
 end)
 
@@ -2963,10 +2962,10 @@ UserInputService.InputBegan:Connect(function(input, processed)
 		if Debounce then return end
 		if Hidden then
 			Hidden = false
-			Unhide()
+			RayfieldLibrary:Unhide()
 		else
 			Hidden = true
-			Hide()
+			RayfieldLibrary:Hide()
 		end
 	end
 end)
