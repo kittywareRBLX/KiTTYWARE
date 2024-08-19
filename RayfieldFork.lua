@@ -2207,7 +2207,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				ListClone.Icon.Visible = true
 				ListClone.Icon.Image = ListSettings.Icon
 				ListClone.Icon.Size = UDim2.new(0, 25, 0, 25)
-        			ListClone.Icon.Position = UDim2.new(0, 5, 0, 5)
+        			ListClone.Icon.Position = UDim2.new(0, 4, 0, 8)
 			end
 			ListClone.Visible = true
 			ListClone.Parent = TabPage
