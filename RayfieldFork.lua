@@ -2203,7 +2203,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			ListClone.Title.Text = ListSettings.Name
 			if ListSettings.Icon ~= nil then
 				table.insert(RayfieldLibrary.DropdownIcons, ListClone.Icon)
-				ListClone.Title.Position = UDim2.fromOffset(152,21)
+				ListClone.Title.Position = UDim2.fromOffset(150,75)
 				ListClone.Icon.Visible = true
 				ListClone.Icon.Image = ListSettings.Icon
 			end
