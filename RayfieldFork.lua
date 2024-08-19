@@ -2203,9 +2203,11 @@ function RayfieldLibrary:CreateWindow(Settings)
 			ListClone.Title.Text = ListSettings.Name
 			if ListSettings.Icon ~= nil then
 				table.insert(RayfieldLibrary.DropdownIcons, ListClone.Icon)
-				ListClone.Title.Position = UDim2.fromOffset(150,75)
+				ListClone.Title.Position = UDim2.fromOffset(152,21)
 				ListClone.Icon.Visible = true
 				ListClone.Icon.Image = ListSettings.Icon
+				ListClone.Icon.Size = UDim2.new(0, 40, 0, 40)
+        			ListClone.Icon.Position = UDim2.new(0, 10, 0, 10)
 			end
 			ListClone.Visible = true
 			ListClone.Parent = TabPage
