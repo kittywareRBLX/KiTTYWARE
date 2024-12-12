@@ -659,8 +659,7 @@ function RayfieldLibrary:Notify(NotificationSettings)
 	end)
 end
 
-function Hide()
-
+function RayfieldLibrary:Hide()
 	-- if isMobile then
 	-- 	RayfieldLibrary:Notify({Title = "Interface", Content = "Mobile players cannot hide the UI, only minimize", Duration = 4})
 	-- 	return
@@ -718,7 +717,7 @@ function Hide()
 	Debounce = false
 end
 
-function Unhide()
+function RayfieldLibrary:Unhide()
 	Debounce = true
 	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Main.Visible = true
@@ -1636,59 +1635,46 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		-- Paragraph
 		function Tab:CreateParagraph(ParagraphSettings)
-			local ParagraphValue = {}
-
-			local Paragraph = Elements.Template.Paragraph:Clone()
-			Paragraph.Title.Text = ParagraphSettings.Title
-			Paragraph.Content.Text = ParagraphSettings.Content.."\n"
-			Paragraph.Visible = true
-			Paragraph.Parent = TabPage
-
-			local textSize = TextService:GetTextSize(
-				Paragraph.Content.Text,
-				Paragraph.Content.TextSize,
-				Paragraph.Content.Font,
-				Vector2.new(Paragraph.Content.AbsoluteSize.X, Paragraph.Content.AbsoluteSize.Y)
-			)
-
-			Paragraph.Content.Size = UDim2.new(0, 438, 0, textSize.Y)
-			Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
-
-			Paragraph.Size = UDim2.new(1, -10, 0, textSize.Y + 25)
-
-
-			Paragraph.BackgroundTransparency = 1
-			Paragraph.UIStroke.Transparency = 1
-			Paragraph.Title.TextTransparency = 1
-			Paragraph.Content.TextTransparency = 1
-
-			Paragraph.BackgroundColor3 = SelectedTheme.SecondaryElementBackground
-			Paragraph.UIStroke.Color = SelectedTheme.SecondaryElementStroke
-
-			TweenService:Create(Paragraph, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
-			TweenService:Create(Paragraph.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
-			TweenService:Create(Paragraph.Title, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()	
-			TweenService:Create(Paragraph.Content, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()	
-
-			function ParagraphValue:Set(NewParagraphSettings)
-				Paragraph.Title.Text = NewParagraphSettings.Title
-				Paragraph.Content.Text = NewParagraphSettings.Content.."\n"
-
-				local textSize = TextService:GetTextSize(
-					Paragraph.Content.Text,
-					Paragraph.Content.TextSize,
-					Paragraph.Content.Font,
-					Vector2.new(Paragraph.Content.AbsoluteSize.X, math.huge)
-				)
-
-				Paragraph.Content.Size = UDim2.new(0, 438, 0, textSize.Y)
-				Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
-
-				Paragraph.Size = UDim2.new(1, -10, 0, textSize.Y + 25)
-
-			end
-
-			return ParagraphValue
+		    local ParagraphValue = {}
+		
+		    local Paragraph = Elements.Template.Paragraph:Clone()
+		    Paragraph.Title.Text = ParagraphSettings.Title
+		    Paragraph.Content.Text = "\n\n"..ParagraphSettings.Content
+		    Paragraph.Visible = true
+		    Paragraph.Parent = TabPage
+		
+		    local function calculateTextHeight(text, font, textSize, maxWidth)
+		        local textSize = TextService:GetTextSize(text, textSize, font, Vector2.new(maxWidth, math.huge))
+		        return textSize.Y
+		    end
+		
+		    local maxWidth = 438
+		    local textHeight = calculateTextHeight(Paragraph.Content.Text, Paragraph.Content.Font, Paragraph.Content.TextSize, maxWidth)
+		
+		    Paragraph.Content.Size = UDim2.new(0, maxWidth, 0, textHeight - 2)
+		    Paragraph.Content.Position = UDim2.new(0.037, 0, 1, 0)
+		
+		    Paragraph.Size = UDim2.new(1, -10, 0, textHeight)
+		
+		    Paragraph.BackgroundTransparency = 1
+		    Paragraph.UIStroke.Transparency = 1
+		    Paragraph.Title.TextTransparency = 1
+		    Paragraph.Content.TextTransparency = 1
+		
+		    Paragraph.BackgroundColor3 = SelectedTheme.SecondaryElementBackground
+		    Paragraph.UIStroke.Color = SelectedTheme.SecondaryElementStroke
+		
+		    TweenService:Create(Paragraph, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
+		    TweenService:Create(Paragraph.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
+		    TweenService:Create(Paragraph.Title, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()
+		    TweenService:Create(Paragraph.Content, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()
+		
+		    function ParagraphValue:Set(NewParagraphSettings)
+		        Paragraph.Title.Text = NewParagraphSettings.Title
+		        Paragraph.Content.Text = "\n\n"..NewParagraphSettings.Content
+		    end
+		
+		    return ParagraphValue
 		end
 
 		-- Input
@@ -2216,9 +2202,11 @@ function RayfieldLibrary:CreateWindow(Settings)
 			ListClone.Title.Text = ListSettings.Name
 			if ListSettings.Icon ~= nil then
 				table.insert(RayfieldLibrary.DropdownIcons, ListClone.Icon)
-				ListClone.Title.Position = UDim2.fromOffset(152,21)
+				ListClone.Title.Position = UDim2.fromOffset(150,21)
 				ListClone.Icon.Visible = true
 				ListClone.Icon.Image = ListSettings.Icon
+				ListClone.Icon.Size = UDim2.new(0, 25, 0, 25)
+        			ListClone.Icon.Position = UDim2.new(0, 4, 0, 8)
 			end
 			ListClone.Visible = true
 			ListClone.Parent = TabPage
@@ -2962,10 +2950,10 @@ Topbar.Hide.MouseButton1Click:Connect(function()
 	if Hidden then
 		Hidden = false
 		Minimised = false
-		Unhide()
+		RayfieldLibrary:Unhide()
 	else
 		Hidden = true
-		Hide()
+		RayfieldLibrary:Hide()
 	end
 end)
 
@@ -2974,10 +2962,10 @@ UserInputService.InputBegan:Connect(function(input, processed)
 		if Debounce then return end
 		if Hidden then
 			Hidden = false
-			Unhide()
+			RayfieldLibrary:Unhide()
 		else
 			Hidden = true
-			Hide()
+			RayfieldLibrary:Hide()
 		end
 	end
 end)
